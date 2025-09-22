@@ -229,7 +229,7 @@ base_plot +
     y = "countries",
     title = "mooooooOOOOOOoo"
   ) +
-  theme_classic(base_family = "Comic Sans MS") +
+  theme_classic(base_family = "mono") +
   theme(
     strip.text = element_text(face = "bold", hjust = 1, angle = 180),
     axis.title = element_text(hjust = 0.2, color = "orange"),
