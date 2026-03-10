@@ -13,9 +13,23 @@ format:
         dpi: 300
   typst:
     toc: true
+    toc-title: Contents
+    output-file: PREFIX_05-exercise.pdf
+    pdf-standard: ua-1
+    callout-appearance: minimal
+    include-in-header: 
+      text: |
+        // TOC stuff
+        // Make the title centered and slightly smaller than a full heading
+        #show outline: it => {
+          show heading: it => align(center, text(size: 0.75em, it))
+          it
+        }
     include-before-body: 
       text: |
-        #show link: set text(fill: rgb("e16462"))
+        // Color links with purple from viridis plasma: 
+        // viridisLite::viridis(8, option = "plasma", begin = 0.1, end = 0.9)[3]
+        #show link: set text(fill: rgb("9a169f"))
 
         // Keep track of previous heading levels
         #let last-heading-level = state("last-heading-level", 0)
@@ -122,6 +136,12 @@ Here's a basic bar chart showing the counts of countries and milk types. It's st
 
 ```{r}
 #| label: base-plot
+#| fig-alt: |
+#|   Faceted horizontal bar chart of cheese counts by country and milk type,
+#|   with default styling. Countries on the y-axis, total cheese count on the
+#|   x-axis, and three panels for Cow, Goat, and Sheep milk. Cow milk shows
+#|   the highest cheese variety across most countries; sheep milk is 
+#|   surprisingly common in Italy; goat milk is common in France.
 
 base_plot <- ggplot(
   cheeses_milk_country,
@@ -144,8 +164,7 @@ Your job is to use `labs()` and `theme()` to recreate this plot:
 #| label: recreate-me-plot-1
 #| echo: false
 #| ref.label: recreation-plot-1
-#| fig-width: 6
-#| fig-height: 3
+#| opts.label: true
 ```
 
 **Some helpful big hints:**
@@ -181,6 +200,13 @@ base_plot +
 #| label: recreation-plot-1
 #| fig-width: 6
 #| fig-height: 3
+#| fig-alt: |
+#|   Faceted horizontal bar chart of cheese counts by country and milk type,
+#|   styled with theme_bw and descriptive labels. Countries on the y-axis,
+#|   total types of cheeses on the x-axis, three panels for Cow, Goat, and
+#|   Sheep milk. Bold facet labels, a left-aligned axis title, and a subtitle
+#|   in gray give the chart a polished, professional appearance. The title
+#|   reads "Cow-based cheese rules the world."
 
 base_plot +
   labs(
@@ -222,10 +248,17 @@ Hopefully you did something neat! Here's something I did:
 #| message: false
 #| fig-width: 6
 #| fig-height: 3
+#| fig-alt: |
+#|   Faceted horizontal bar chart of cheese counts, intentionally styled to
+#|   be visually unpleasant. Countries on the y-axis, cheese count on the
+#|   x-axis, three panels for Cow, Goat, and Sheep milk. The chart uses a
+#|   bright green panel background, purple plot background, yellow angled
+#|   title text, and upside-down rotated facet labels—demonstrating
+#|   principles of bad data visualization design.
 
 base_plot +
   labs(
-    x = "cheese", 
+    x = "cheese",
     y = "countries",
     title = "mooooooOOOOOOoo"
   ) +
